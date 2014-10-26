@@ -139,6 +139,11 @@ namespace YGOCore.Game
 
         public void AddPlayer(Player player)
         {
+            int pos = GetAvailablePlayerPos();
+            if (Program.Config.STDOUT == true)
+                Console.WriteLine("::::join-slot|{1}|{0}", player.Name, pos);
+
+
             if (State != GameState.Lobby)
             {
                 player.Type = (int)PlayerType.Observer;
@@ -158,7 +163,7 @@ namespace YGOCore.Game
             if (HostPlayer == null)
                 HostPlayer = player;
 
-            int pos = GetAvailablePlayerPos();
+           
             if (pos != -1)
             {
                 GameServerPacket enter = new GameServerPacket(StocMessage.HsPlayerEnter);
@@ -170,8 +175,7 @@ namespace YGOCore.Game
                 IsReady[pos] = false;
                 player.Type = pos;
 
-                if (Program.Config.STDOUT == true)
-                    Console.WriteLine("::::join-slot-{1}|{0}", player.Name, pos);
+                
             }
             else
             {
@@ -244,7 +248,7 @@ namespace YGOCore.Game
                 GameServerPacket change = new GameServerPacket(StocMessage.HsPlayerChange);
                 change.Write((byte)((player.Type << 4) + (int)PlayerChange.Leave));
                 if (Program.Config.STDOUT == true)
-                Console.WriteLine("::::left-slot-{1}|{0}", player.Name, player.Type);
+                    Console.WriteLine("::::left-slot|{1}|{0}", player.Name, player.Type);
 
                 SendToAll(change);
                 player.Disconnect();
@@ -258,6 +262,7 @@ namespace YGOCore.Game
             if (State != GameState.Lobby)
                 return;
             int pos = GetAvailablePlayerPos();
+            
             if (pos == -1)
                 return;
             if (player.Type != (int)PlayerType.Observer)
@@ -270,6 +275,8 @@ namespace YGOCore.Game
                     pos = (pos + 1) % 4;
 
                 GameServerPacket change = new GameServerPacket(StocMessage.HsPlayerChange);
+                if (Program.Config.STDOUT == true)
+                    Console.WriteLine("::::left-slot|{1}|{0}", player.Name, player.Type);
                 change.Write((byte)((player.Type << 4) + pos));
                 SendToAll(change);
 
@@ -291,12 +298,15 @@ namespace YGOCore.Game
 
                 GameServerPacket nwatch = new GameServerPacket(StocMessage.HsWatchChange);
                 nwatch.Write((short)Observers.Count);
-                if (Program.Config.STDOUT == true)
-                Console.WriteLine("::::spectator|{0}", Observers.Count);
+                
                 SendToAll(nwatch);
 
                 player.SendTypeChange();
             }
+            if (Program.Config.STDOUT == true)
+                Console.WriteLine("::::join-slot|{1}|{0}", player.Name, pos);
+            if (Program.Config.STDOUT == true)
+                Console.WriteLine("::::spectator|{0}", Observers.Count);
         }
 
         public void MoveToObserver(Player player)
@@ -307,6 +317,8 @@ namespace YGOCore.Game
                 return;
             if (IsReady[player.Type])
                 return;
+            if (Program.Config.STDOUT == true)
+                Console.WriteLine("::::left-slot|{1}|{0}", player.Name, player.Type);
             Players[player.Type] = null;
             IsReady[player.Type] = false;
             Observers.Add(player);
@@ -381,7 +393,7 @@ namespace YGOCore.Game
             GameServerPacket change = new GameServerPacket(StocMessage.HsPlayerChange);
             change.Write((byte)((player.Type << 4) + (int)(ready ? PlayerChange.Ready : PlayerChange.NotReady)));
             if (Program.Config.STDOUT == true)
-            Console.WriteLine("::::lock-slot-{1}|{0}", ready, player.Type);
+            Console.WriteLine("::::lock-slot|{1}|{0}", ready, player.Type);
             SendToAll(change);
         }
 
@@ -393,7 +405,7 @@ namespace YGOCore.Game
                 return;
             RemovePlayer(Players[pos]);
             if (Program.Config.STDOUT == true) 
-                Console.WriteLine("::::left-slot-{1}|{0}", player.Name, pos);
+                Console.WriteLine("::::left-slot|{1}|{0}", player.Name, pos);
         }
 
         public void StartDuel(Player player)
