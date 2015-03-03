@@ -13,7 +13,7 @@ namespace YGOCore
 
         public static ServerConfig Config { get; private set; }
         public static Random Random;
-        public List<IGameWatcher> WatcherList;
+        public static List<IGameWatcher> WatcherList;
 
 
         static void Main(string[] args)

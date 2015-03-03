@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 
 namespace YGOCore.Game
 {
-    [DataContract]
+  
 	public interface IGameConfig
 	{
         [DataMember(Order=0)]

@@ -12,7 +12,7 @@ using YGOCore.Game.Enums;
 
 namespace YGOCore
 {
-    public class SocketBaseWatcher: IGameWatcher
+    public class SocketBaseWatcher : IGameWatcher
     {
         private Thread m_watch_thread;
         private TcpListener m_watch_listener;
@@ -48,9 +48,10 @@ namespace YGOCore
             }
         }
 
-        public void OnEvent(GameWatchEvent eventType, Object formatParams) {
+        public void onEvent(GameWatchEvent eventType, Object formatParams) {
             m_event_queue.Add(new KeyValuePair<GameWatchEvent, object>(eventType, formatParams));
         }
+
 
         private void WatchLoop ()
 		{
@@ -63,7 +64,7 @@ namespace YGOCore
                 BinaryWriter writer = new BinaryWriter(stream);
 				while (IsWatching) {
                     KeyValuePair<GameWatchEvent, object> pair = m_event_queue.Take();
-                    writer.Write(pair.Value.ToString);
+                    writer.Write(pair.Value.ToString());
                     stream.Flush();
 				}
             }
@@ -75,4 +76,3 @@ namespace YGOCore
 
     }
 }
-

@@ -21,3 +21,4 @@ namespace YGOCore
         void onEvent(GameWatchEvent eventType, Object formatParams);
     }
 }
+
