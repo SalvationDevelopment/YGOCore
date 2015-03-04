@@ -8,7 +8,8 @@ namespace YGOCore
     public static class GameManager
     {
 
-        static Dictionary<string, GameRoom> m_rooms = new Dictionary<string,GameRoom>();
+        //static Dictionary<string, GameRoom> m_rooms = new Dictionary<string,GameRoom>();
+        static ConcurrentDictionary<string, GameRoom> m_rooms = new ConcurrentDictionary<string,GameRoom>();
 
         public static GameRoom CreateOrGetGame(IGameConfig config)
         {
@@ -66,7 +67,8 @@ namespace YGOCore
         private static GameRoom CreateRoom(IGameConfig config)
         {
             GameRoom room = new GameRoom(config);
-            m_rooms.Add(config.Name, room);
+            //m_rooms.Add(config.Name, room);
+            m_rooms.TryAdd(config.Name, room);
             Logger.WriteLine("Game++");
             return room;
         }
@@ -84,7 +86,8 @@ namespace YGOCore
 
             foreach (string room in toRemove)
             {
-                m_rooms.Remove(room);
+                //m_rooms.Remove(room);
+                m_rooms.TryRemove(room, NULL);
                 Logger.WriteLine("Game--");
             }
         }
@@ -105,6 +108,13 @@ namespace YGOCore
                 if (!m_rooms.ContainsKey(roomname))
                     return roomname;
             }     
+        }
+
+        public static GameRoom[] GetRooms() {
+            GameRoom[] rooms;
+            rooms = new GameRoom[m_rooms.Count];
+            m_rooms.Values.CopyTo(rooms, 0);
+            return rooms;
         }
 
     }

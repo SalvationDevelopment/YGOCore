@@ -1,12 +1,17 @@
 ﻿using YGOCore.Game.Enums;
+using System.Runtime.Serialization;
 
 namespace YGOCore.Game
 {
+    [DataContract]
     public class Player
     {
         public Game Game { get; private set; }
+        [DataMember(Order=0)]
         public string Name { get; private set; }
+        [DataMember(Order=1)]
         public bool IsAuthentified { get; private set; }
+        [DataMember(Order=2)]
         public int Type { get; set; }
         public int TurnSkip { get; set; }
         public Deck Deck { get; private set; }

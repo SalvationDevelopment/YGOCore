@@ -1,11 +1,16 @@
 ﻿using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization;
 
 namespace YGOCore.Game
 {
+    [DataContract]
     public class GameRoom
     {
+        [DataMember(Order=0)]
         public Game Game { get; private set; }
         public List<GameClient> m_clients { get; private set; }
+        [DataMember(Order=1)]
         public bool IsOpen { get; private set; }
         private bool m_closePending { get; set; }
 
