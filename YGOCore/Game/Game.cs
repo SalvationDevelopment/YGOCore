@@ -145,7 +145,7 @@ namespace YGOCore.Game
         {
             int pos = GetAvailablePlayerPos();
             if (Program.Config.STDOUT == true)
-                Console.WriteLine("::::join-slot|{1}|{0}", player.Name, pos);
+                Console.WriteLine("::::join-slot|{2}|{1}|{0}", player.Name, pos, Config.Name);
             foreach(IGameWatcher watcher in Program.WatcherList)
             {
                 watcher.onEvent(GameWatchEvent.EventJoinSlot, String.Format("::::join-slot|{1}|{0}", player.Name, pos));
@@ -188,7 +188,7 @@ namespace YGOCore.Game
                 GameServerPacket watch = new GameServerPacket(StocMessage.HsWatchChange);
                 watch.Write((short)(Observers.Count + 1));
                 if (Program.Config.STDOUT == true)
-                    Console.WriteLine("::::spectator|{0}", Observers.Count);
+                    Console.WriteLine("::::spectator|{1}|{0}", Observers.Count, Config.Name);
                 foreach(IGameWatcher watcher in Program.WatcherList)
                 {
                     watcher.onEvent(GameWatchEvent.EventSpectator, String.Format("::::spectator|{0}", Observers.Count));
@@ -227,7 +227,7 @@ namespace YGOCore.Game
                 nwatch.Write((short)Observers.Count);
                 player.Send(nwatch);
                 if (Program.Config.STDOUT == true)
-                    Console.WriteLine("::::spectator|{0}", Observers.Count);
+                    Console.WriteLine("::::spectator|{1}|{0}", Observers.Count, Config.Name);
                 foreach(IGameWatcher watcher in Program.WatcherList)
                 {
                     watcher.onEvent(GameWatchEvent.EventSpectator, String.Format("::::spectator|{0}", Observers.Count));
@@ -249,7 +249,7 @@ namespace YGOCore.Game
                     nwatch.Write((short)Observers.Count);
                     SendToAll(nwatch);
                     if (Program.Config.STDOUT == true)
-                        Console.WriteLine("::::spectator|{0}", Observers.Count);
+                        Console.WriteLine("::::spectator|{1}|{0}", Observers.Count, Config.Name);
                     foreach(IGameWatcher watcher in Program.WatcherList)
                     {
                         watcher.onEvent(GameWatchEvent.EventSpectator, String.Format("::::spectator|{0}", Observers.Count));
@@ -267,7 +267,7 @@ namespace YGOCore.Game
                 GameServerPacket change = new GameServerPacket(StocMessage.HsPlayerChange);
                 change.Write((byte)((player.Type << 4) + (int)PlayerChange.Leave));
                 if (Program.Config.STDOUT == true)
-                    Console.WriteLine("::::left-slot|{1}|{0}", player.Name, player.Type);
+                    Console.WriteLine("::::left-slot|{2}|{1}|{0}", player.Name, player.Type, Config.Name);
                 foreach(IGameWatcher watcher in Program.WatcherList)
                 {
                     watcher.onEvent(GameWatchEvent.EventLeftSlot, String.Format("::::left-slot|{1}|{0}", player.Name, player.Type));
@@ -298,7 +298,7 @@ namespace YGOCore.Game
 
                 GameServerPacket change = new GameServerPacket(StocMessage.HsPlayerChange);
                 if (Program.Config.STDOUT == true)
-                    Console.WriteLine("::::left-slot|{1}|{0}", player.Name, player.Type);
+                    Console.WriteLine("::::left-slot|{2}|{1}|{0}", player.Name, player.Type, Config.Name);
                 foreach(IGameWatcher watcher in Program.WatcherList)
                 {
                     watcher.onEvent(GameWatchEvent.EventLeftSlot, String.Format("::::left-slot|{1}|{0}", player.Name, player.Type));
@@ -330,13 +330,13 @@ namespace YGOCore.Game
                 player.SendTypeChange();
             }
             if (Program.Config.STDOUT == true)
-                Console.WriteLine("::::join-slot|{1}|{0}", player.Name, pos);
+                Console.WriteLine("::::join-slot|{2}|{1}|{0}", player.Name, pos, Config.Name);
             foreach(IGameWatcher watcher in Program.WatcherList)
             {
                 watcher.onEvent(GameWatchEvent.EventJoinSlot, String.Format("::::join-slot|{1}|{0}", player.Name, pos));
             }
             if (Program.Config.STDOUT == true)
-                Console.WriteLine("::::spectator|{0}", Observers.Count);
+                Console.WriteLine("::::spectator|{1}|{0}", Observers.Count, Config.Name);
             foreach(IGameWatcher watcher in Program.WatcherList)
             {
                 watcher.onEvent(GameWatchEvent.EventSpectator, String.Format("::::spectator|{0}", Observers.Count));
@@ -352,7 +352,7 @@ namespace YGOCore.Game
             if (IsReady[player.Type])
                 return;
             if (Program.Config.STDOUT == true)
-                Console.WriteLine("::::left-slot|{1}|{0}", player.Name, player.Type);
+                Console.WriteLine("::::left-slot|{2}|{1}|{0}", player.Name, player.Type, Config.Name);
             foreach(IGameWatcher watcher in Program.WatcherList)
             {
                 watcher.onEvent(GameWatchEvent.EventLeftSlot, String.Format("::::left-slot|{1}|{0}", player.Name, player.Type));
@@ -368,7 +368,7 @@ namespace YGOCore.Game
             player.Type = (int)PlayerType.Observer;
             player.SendTypeChange();
             if (Program.Config.STDOUT == true)
-                Console.WriteLine("::::spectator|{0}", Observers.Count);
+                Console.WriteLine("::::spectator|{1}|{0}", Observers.Count, Config.Name);
             foreach(IGameWatcher watcher in Program.WatcherList)
             {
                 watcher.onEvent(GameWatchEvent.EventSpectator, String.Format("::::spectator|{0}", Observers.Count));
@@ -384,7 +384,7 @@ namespace YGOCore.Game
             packet.Write(msg, msg.Length + 1);
             SendToAllBut(packet, player);
             if (Program.Config.STDOUT == true) 
-                Console.WriteLine("::::chat|{0}|{1}", player.Name, msg);
+                Console.WriteLine("::::chat|{2}|{0}|{1}", player.Name, msg, Config.Name);
             foreach(IGameWatcher watcher in Program.WatcherList)
             {
                 watcher.onEvent(GameWatchEvent.EventChat, String.Format("::::chat|{0}|{1}", player.Name, msg));
@@ -399,7 +399,7 @@ namespace YGOCore.Game
             packet.Write(finalmsg, finalmsg.Length + 1);
             SendToAll(packet);
             if (Program.Config.STDOUT == true) 
-                Console.WriteLine("::::chat|[Server]|{0}", msg);
+                Console.WriteLine("::::chat|{2}|[Server]|{0}", msg, Config.Name);
             foreach(IGameWatcher watcher in Program.WatcherList)
             {
                 watcher.onEvent(GameWatchEvent.EventChat, String.Format("::::chat|[Server]|{0}", msg));
@@ -445,7 +445,7 @@ namespace YGOCore.Game
             GameServerPacket change = new GameServerPacket(StocMessage.HsPlayerChange);
             change.Write((byte)((player.Type << 4) + (int)(ready ? PlayerChange.Ready : PlayerChange.NotReady)));
             if (Program.Config.STDOUT == true)
-            Console.WriteLine("::::lock-slot|{1}|{0}", ready, player.Type);
+            Console.WriteLine("::::lock-slot|{2}|{1}|{0}", ready, player.Type,Config.Name);
             foreach(IGameWatcher watcher in Program.WatcherList)
             {
                 watcher.onEvent(GameWatchEvent.EventLockSlot, String.Format("::::lock-slot|{1}|{0}", ready, player.Type));
@@ -461,7 +461,7 @@ namespace YGOCore.Game
                 return;
             RemovePlayer(Players[pos]);
             if (Program.Config.STDOUT == true) 
-                Console.WriteLine("::::left-slot|{1}|{0}", player.Name, pos);
+                Console.WriteLine("::::left-slot|{2}|{1}|{0}", player.Name, pos, Config.Name);
             foreach(IGameWatcher watcher in Program.WatcherList)
             {
                 watcher.onEvent(GameWatchEvent.EventLeftSlot, String.Format("::::left-slot|{1}|{0}", player.Name, pos));
@@ -484,7 +484,7 @@ namespace YGOCore.Game
 
             State = GameState.Hand;
             if (Program.Config.STDOUT == true) 
-                Console.WriteLine("::::startduel");
+                Console.WriteLine("::::startduel|{0}", Config.Name);
             foreach(IGameWatcher watcher in Program.WatcherList)
             {
                 watcher.onEvent(GameWatchEvent.EventStartDuel, String.Format("::::startduel"));
@@ -714,7 +714,7 @@ namespace YGOCore.Game
         {
             //Record user win here
             if (Program.Config.STDOUT == true)
-                Console.WriteLine("::::endduel|{0}|{1}", team, reason);
+                Console.WriteLine("::::endduel|{2}|{0}|{1}", team, reason, Config.Name);
             foreach(IGameWatcher watcher in Program.WatcherList)
             {
                 watcher.onEvent(GameWatchEvent.EventEndDuel, String.Format("::::endduel|{0}|{1}", team, reason));
