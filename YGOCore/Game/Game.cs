@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using OcgWrapper;
-using OcgWrapper.Enums;
+using battleWrapper;
+using battleWrapper.Enums;
 using YGOCore.Game.Enums;
 using YGOCore;
 

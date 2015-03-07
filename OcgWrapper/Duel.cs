@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
-using OcgWrapper.Enums;
-using OcgWrapper.Helpers;
+using battleWrapper.Enums;
+using battleWrapper.Helpers;
 
-namespace OcgWrapper
+namespace battleWrapper
 {
     public class Duel
     {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using OcgWrapper;
-using OcgWrapper.Enums;
+using battleWrapper;
+using battleWrapper.Enums;
 using YGOCore;
 
 namespace YGOCore.Game

@@ -1,4 +1,4 @@
-﻿namespace OcgWrapper.Enums
+﻿namespace battleWrapper.Enums
 {
     public enum CardLocation
     {

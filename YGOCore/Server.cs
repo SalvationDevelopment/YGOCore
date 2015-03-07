@@ -3,7 +3,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Collections.Generic;
 using YGOCore.Game;
-using OcgWrapper;
+using battleWrapper;
 
 namespace YGOCore
 {

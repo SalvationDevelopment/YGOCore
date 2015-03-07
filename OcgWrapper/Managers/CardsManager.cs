@@ -8,7 +8,7 @@ using SQLiteDataReader = Mono.Data.Sqlite.SqliteDataReader;
 using System.Data.SQLite;
 #endif
 
-namespace OcgWrapper.Managers
+namespace battleWrapper.Managers
 {
     internal static class CardsManager
     {

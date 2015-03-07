@@ -1,4 +1,4 @@
-﻿namespace OcgWrapper.Helpers
+﻿namespace battleWrapper.Helpers
 {
     internal class MtRandom
     {

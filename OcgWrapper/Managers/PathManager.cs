@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace OcgWrapper.Managers
+namespace battleWrapper.Managers
 {
     internal static class PathManager
     {

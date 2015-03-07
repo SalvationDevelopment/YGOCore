@@ -1,5 +1,5 @@
 ﻿using System.IO;
-using OcgWrapper.Enums;
+using battleWrapper.Enums;
 using YGOCore.Game.Enums;
 
 namespace YGOCore.Game

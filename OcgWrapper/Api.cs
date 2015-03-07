@@ -2,52 +2,52 @@
 using System.Collections.Concurrent;
 using System.IO;
 using System.Runtime.InteropServices;
-using OcgWrapper.Managers;
+using battleWrapper.Managers;
 
-namespace OcgWrapper
+namespace battleWrapper
 {
     public static unsafe class Api
     {
-        [DllImport("ocgcore", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("battlepack", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
         public static extern void set_card_reader(CardReader f);
-        [DllImport("ocgcore", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("battlepack", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
         public static extern void set_message_handler(MessageHandler f);
-        [DllImport("ocgcore", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("battlepack", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
         public static extern void set_script_reader(ScriptReader f);
 
-        [DllImport("ocgcore", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("battlepack", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
         public static extern IntPtr create_duel(UInt32 seed);
-        [DllImport("ocgcore", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("battlepack", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
         public static extern void start_duel(IntPtr pduel, Int32 options);
-        [DllImport("ocgcore", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("battlepack", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
         public static extern void end_duel(IntPtr pduel);
 
-        [DllImport("ocgcore", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("battlepack", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
         public static extern void set_player_info(IntPtr pduel, Int32 playerid, Int32 lp, Int32 startcount, Int32 drawcount);
-        [DllImport("ocgcore", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("battlepack", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
         public static extern void new_card(IntPtr pduel, UInt32 code, Byte owner, Byte playerid, Byte location, Byte sequence, Byte position);
-        [DllImport("ocgcore", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("battlepack", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
         public static extern void new_tag_card(IntPtr pduel, UInt32 code, Byte owner, Byte location);
 
-        [DllImport("ocgcore", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("battlepack", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
         public static extern Int32 process(IntPtr pduel);
-        [DllImport("ocgcore", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("battlepack", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
         public static extern Int32 get_message(IntPtr pduel, IntPtr buf);
-        [DllImport("ocgcore", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("battlepack", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
         public static extern void get_log_message(IntPtr pduel, IntPtr buf);
 
-        [DllImport("ocgcore", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("battlepack", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
         public static extern void set_responseb(IntPtr pduel, IntPtr buf);
-        [DllImport("ocgcore", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("battlepack", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
         public static extern void set_responsei(IntPtr pduel, UInt32 value);
 
-        [DllImport("ocgcore", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("battlepack", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
         public static extern Int32 query_card(IntPtr pduel, Byte playerid, Byte location, Byte sequence, Int32 queryFlag, IntPtr buf, Int32 useCache);
-        [DllImport("ocgcore", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("battlepack", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
         public static extern Int32 query_field_count(IntPtr pduel, Byte playerid, Byte location);
-        [DllImport("ocgcore", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("battlepack", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
         public static extern Int32 query_field_card(IntPtr pduel, Byte playerid, Byte location, Int32 queryFlag, IntPtr buf, Int32 useCache);
-        [DllImport("ocgcore", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("battlepack", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
         public static extern Int32 query_field_info(IntPtr pduel, IntPtr buf);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]

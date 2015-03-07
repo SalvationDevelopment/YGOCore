@@ -1,7 +1,7 @@
 ﻿using System;
-using OcgWrapper.Managers;
+using battleWrapper.Managers;
 
-namespace OcgWrapper
+namespace battleWrapper
 {
     public class Card
     {
